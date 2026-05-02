@@ -1,0 +1,30 @@
+{# ===== Custom Component: Cat Categories Grid ===== #}
+<section class="categories-section" aria-labelledby="categories-heading">
+  <div class="section-heading">
+    <h2 id="categories-heading" class="section-heading__title">{{ trans('home.featured_categories') }}</h2>
+  </div>
+
+  <div class="category-pills" role="list">
+    <a href="{{ url('products') }}" class="category-pills__pill category-pills__pill--active" role="listitem">
+      {{ trans('categories.all') }}
+    </a>
+    <a href="{{ url('products', { category: 'dry-food' }) }}" class="category-pills__pill" role="listitem">
+      {{ trans('categories.dry_food') }}
+    </a>
+    <a href="{{ url('products', { category: 'wet-food' }) }}" class="category-pills__pill" role="listitem">
+      {{ trans('categories.wet_food') }}
+    </a>
+    <a href="{{ url('products', { category: 'treats' }) }}" class="category-pills__pill" role="listitem">
+      {{ trans('categories.treats') }}
+    </a>
+    <a href="{{ url('products', { category: 'kittens' }) }}" class="category-pills__pill" role="listitem">
+      {{ trans('categories.kittens') }}
+    </a>
+    <a href="{{ url('products', { category: 'senior' }) }}" class="category-pills__pill" role="listitem">
+      {{ trans('categories.senior') }}
+    </a>
+    <a href="{{ url('products', { category: 'grain-free') }) }}" class="category-pills__pill" role="listitem">
+      {{ trans('categories.grain_free') }}
+    </a>
+  </div>
+</section>

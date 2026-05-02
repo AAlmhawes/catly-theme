@@ -1,0 +1,132 @@
+{
+  "common": {
+    "search": "Search",
+    "search_placeholder": "Find your cat's favorite food...",
+    "cart": "Cart",
+    "wishlist": "Wishlist",
+    "account": "Account",
+    "menu": "Menu",
+    "close": "Close",
+    "loading": "Loading...",
+    "see_all": "See all",
+    "see_more": "See more",
+    "currency": "SAR",
+    "free": "Free"
+  },
+  "navigation": {
+    "home": "Home",
+    "shop": "Shop",
+    "categories": "Categories",
+    "brands": "Brands",
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+  "home": {
+    "hero_title": "Food your cat will love",
+    "hero_subtitle": "Balanced nutrition for happy, healthy cats",
+    "shop_now": "Shop now",
+    "best_sellers": "Best sellers",
+    "new_arrivals": "New arrivals",
+    "featured_categories": "Featured categories",
+    "subscribe_save": "Subscribe & save 15%",
+    "subscribe_description": "Get your cat's food delivered automatically every month"
+  },
+  "categories": {
+    "all": "All",
+    "dry_food": "Dry food",
+    "wet_food": "Wet food",
+    "treats": "Treats",
+    "kittens": "Kittens",
+    "adult": "Adult cats",
+    "senior": "Senior cats",
+    "grain_free": "Grain-free",
+    "prescription": "Prescription"
+  },
+  "product": {
+    "add_to_cart": "Add to cart",
+    "buy_now": "Buy now",
+    "out_of_stock": "Out of stock",
+    "in_stock": "In stock",
+    "size": "Size",
+    "weight": "Weight",
+    "flavor": "Flavor",
+    "quantity": "Quantity",
+    "description": "Description",
+    "ingredients": "Ingredients",
+    "nutritional_info": "Nutritional info",
+    "reviews": "Reviews",
+    "related_products": "Related products",
+    "best_seller": "Best seller",
+    "new": "New",
+    "vet_approved": "Vet approved",
+    "save": "Save",
+    "free_shipping": "Free shipping",
+    "rating": "Rating",
+    "reviews_count": "{count} reviews"
+  },
+  "cart": {
+    "title": "Shopping cart",
+    "empty": "Your cart is empty",
+    "empty_cta": "Start shopping",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "discount": "Discount",
+    "tax": "Tax",
+    "total": "Total",
+    "checkout": "Checkout",
+    "continue_shopping": "Continue shopping",
+    "remove": "Remove",
+    "promo_code": "Promo code",
+    "apply": "Apply"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "shipping_address": "Shipping address",
+    "payment_method": "Payment method",
+    "order_summary": "Order summary",
+    "place_order": "Place order",
+    "order_placed": "Your order has been placed successfully"
+  },
+  "account": {
+    "login": "Sign in",
+    "register": "Create account",
+    "logout": "Sign out",
+    "profile": "Profile",
+    "orders": "My orders",
+    "addresses": "Addresses",
+    "wishlist": "Wishlist"
+  },
+  "footer": {
+    "about_us": "About us",
+    "customer_service": "Customer service",
+    "quick_links": "Quick links",
+    "newsletter_title": "Subscribe to our newsletter",
+    "newsletter_description": "Get exclusive offers and cat care tips",
+    "email_placeholder": "Your email",
+    "subscribe": "Subscribe",
+    "follow_us": "Follow us",
+    "all_rights_reserved": "All rights reserved",
+    "shipping_policy": "Shipping policy",
+    "return_policy": "Return policy",
+    "privacy_policy": "Privacy policy",
+    "terms_conditions": "Terms & conditions"
+  },
+  "errors": {
+    "page_not_found": "Page not found",
+    "page_not_found_description": "Sorry, the page you're looking for doesn't exist",
+    "back_home": "Back to home",
+    "something_wrong": "Something went wrong",
+    "try_again": "Try again",
+    "no_results": "No results found"
+  },
+  "store_features": {
+    "free_shipping_title": "Free shipping",
+    "free_shipping_description": "On orders over 200 SAR",
+    "easy_returns_title": "Easy returns",
+    "easy_returns_description": "Within 14 days",
+    "secure_payment_title": "Secure payment",
+    "secure_payment_description": "All payment methods accepted",
+    "vet_approved_title": "Vet approved",
+    "vet_approved_description": "Expert-recommended products"
+  }
+}

@@ -1,0 +1,65 @@
+{# ===== Header Component ===== #}
+<header class="site-header" role="banner">
+  <div class="container">
+    <div class="site-header__inner">
+
+      {# Logo #}
+      <a href="{{ store.url }}" class="site-header__logo" aria-label="{{ store.name }}">
+        {% if store.logo %}
+          <img src="{{ store.logo }}" alt="{{ store.name }}" width="32" height="32" loading="eager">
+        {% else %}
+          <span class="site-header__logo-mark" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 32 32">
+              <circle cx="16" cy="16" r="16" fill="var(--color-primary)"/>
+              <path d="M9 17 Q7 11 10 9 L13 14 Q14 12 16 12 Q18 12 19 14 L22 9 Q25 11 23 17 Q23 24 16 24 Q9 24 9 17 Z" fill="var(--color-bg)"/>
+              <circle cx="13" cy="17" r="1.4" fill="var(--color-text)"/>
+              <circle cx="19" cy="17" r="1.4" fill="var(--color-text)"/>
+            </svg>
+          </span>
+        {% endif %}
+        <span>{{ store.name }}</span>
+      </a>
+
+      {# Desktop Nav #}
+      <nav class="site-header__nav" role="navigation" aria-label="{{ trans('navigation.home') }}">
+        <a href="{{ url('home') }}">{{ trans('navigation.home') }}</a>
+        <a href="{{ url('products') }}">{{ trans('navigation.shop') }}</a>
+        <a href="{{ url('categories') }}">{{ trans('navigation.categories') }}</a>
+        <a href="{{ url('brands') }}">{{ trans('navigation.brands') }}</a>
+        <a href="{{ url('blog') }}">{{ trans('navigation.blog') }}</a>
+      </nav>
+
+      {# Action Icons #}
+      <div class="site-header__actions">
+        <button class="site-header__icon-button" aria-label="{{ trans('common.search') }}" data-search-trigger>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>
+          </svg>
+        </button>
+
+        <a href="{{ url('wishlist') }}" class="site-header__icon-button" aria-label="{{ trans('common.wishlist') }}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78Z"/>
+          </svg>
+        </a>
+
+        <a href="{{ url('cart') }}" class="site-header__icon-button" aria-label="{{ trans('common.cart') }}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 3h2l3 13h11l3-9H6"/>
+            <circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/>
+          </svg>
+          <span class="badge" data-cart-badge style="{{ cart.count > 0 ? '' : 'display:none' }}">{{ cart.count | default(0) }}</span>
+        </a>
+
+        <a href="{{ url('account') }}" class="site-header__icon-button" aria-label="{{ trans('common.account') }}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  {% hook 'header:end' %}
+</header>

@@ -1,0 +1,96 @@
+{% extends 'layouts.master' %}
+
+{% block content %}
+  <div class="container" style="padding-block: 24px;">
+
+    <div class="section-heading">
+      <h1 class="section-heading__title">{{ trans('cart.title') }}</h1>
+      <span style="font-size: 14px; color: var(--color-text-muted);">
+        {{ cart.count }} {{ trans('common.cart') | lower }}
+      </span>
+    </div>
+
+    {% if cart.count == 0 %}
+      <div style="text-align: center; padding: 64px 16px;">
+        <div style="font-size: 64px; margin-bottom: 16px; opacity: 0.5;">🐱</div>
+        <h2 style="font-size: 18px; margin: 0 0 8px;">{{ trans('cart.empty') }}</h2>
+        <a href="{{ url('products') }}" class="btn btn--primary" style="margin-top: 16px;">
+          {{ trans('cart.empty_cta') }}
+        </a>
+      </div>
+    {% else %}
+      <div style="display: grid; grid-template-columns: 1fr; gap: 24px;">
+
+        {# Cart Items #}
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          {% for item in cart.items %}
+            <div style="background: #FFFFFF; border-radius: var(--radius-card); padding: 16px; display: flex; gap: 16px; align-items: center;">
+
+              <a href="{{ item.product.url }}" style="background: var(--color-bg); width: 80px; height: 80px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden;">
+                <img src="{{ item.product.image }}" alt="{{ item.product.name }}" width="80" height="80" loading="lazy" decoding="async" style="width: 70%; height: auto;">
+              </a>
+
+              <div style="flex: 1; min-width: 0;">
+                <a href="{{ item.product.url }}" style="font-size: 14px; font-weight: 700; color: var(--color-text); display: block; margin-bottom: 4px;">
+                  {{ item.product.name }}
+                </a>
+                {% if item.options %}
+                  <p style="font-size: 12px; color: var(--color-text-muted); margin: 0 0 8px;">
+                    {{ item.options | join(' · ') }}
+                  </p>
+                {% endif %}
+
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                  <div style="display: flex; align-items: center; background: var(--color-bg); border-radius: var(--radius-pill); padding: 2px;">
+                    <button type="button" data-qty-decrease aria-label="Decrease" style="width: 24px; height: 24px; background: #FFFFFF; border-radius: 50%; border: none; font-weight: 700; font-size: 12px;">−</button>
+                    <input type="number" value="{{ item.quantity }}" min="1" style="width: 32px; text-align: center; background: transparent; border: none; font-weight: 700; font-size: 12px;">
+                    <button type="button" data-qty-increase aria-label="Increase" style="width: 24px; height: 24px; background: #FFFFFF; border-radius: 50%; border: none; font-weight: 700; font-size: 12px;">+</button>
+                  </div>
+                  <span style="font-size: 14px; font-weight: 700; color: var(--color-primary);">
+                    {{ item.total }} {{ store.currency | default('SAR') }}
+                  </span>
+                </div>
+              </div>
+
+              <button type="button" aria-label="{{ trans('cart.remove') }}" onclick="salla.cart.removeItem({{ item.id }})" style="background: none; border: none; padding: 8px; color: var(--color-text-muted);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M5 6l1 14h12l1-14"/></svg>
+              </button>
+            </div>
+          {% endfor %}
+        </div>
+
+        {# Order Summary #}
+        <div style="background: #FFFFFF; border-radius: var(--radius-card); padding: 20px;">
+          <h2 style="font-size: 16px; font-weight: 700; margin: 0 0 16px;">{{ trans('checkout.order_summary') }}</h2>
+
+          <div style="display: flex; justify-content: space-between; font-size: 13px; color: var(--color-text-muted); margin-bottom: 8px;">
+            <span>{{ trans('cart.subtotal') }}</span>
+            <span>{{ cart.subtotal }} {{ store.currency | default('SAR') }}</span>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; font-size: 13px; color: var(--color-text-muted); margin-bottom: 8px;">
+            <span>{{ trans('cart.shipping') }}</span>
+            <span style="color: {{ cart.shipping == 0 ? 'var(--color-accent)' : 'inherit' }}; font-weight: {{ cart.shipping == 0 ? '700' : '400' }};">
+              {{ cart.shipping == 0 ? trans('common.free') : cart.shipping ~ ' ' ~ store.currency }}
+            </span>
+          </div>
+
+          <div style="border-top: 0.5px dashed var(--color-border); margin: 12px 0;"></div>
+
+          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px;">
+            <span style="font-size: 14px; font-weight: 700;">{{ trans('cart.total') }}</span>
+            <span style="font-size: 22px; font-weight: 700; color: var(--color-primary);">
+              {{ cart.total }} {{ store.currency | default('SAR') }}
+            </span>
+          </div>
+
+          <a href="{{ url('checkout') }}" class="btn btn--primary btn--block">
+            {{ trans('cart.checkout') }}
+          </a>
+        </div>
+
+      </div>
+    {% endif %}
+
+  </div>
+{% endblock %}

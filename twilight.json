@@ -1,0 +1,165 @@
+{
+  "version": "1.0.0",
+  "theme_name": "Catly",
+  "repo_url": "https://github.com/your-username/catly-theme",
+  "support_url": "https://catly.dev",
+  "settings": [
+    {
+      "type": "collection",
+      "name": "brand_colors",
+      "label": {
+        "ar": "ألوان العلامة التجارية",
+        "en": "Brand colors"
+      },
+      "fields": [
+        {
+          "type": "string",
+          "name": "color_primary",
+          "label": { "ar": "اللون الأساسي", "en": "Primary color" },
+          "default": "#FF7A4D",
+          "format": "color"
+        },
+        {
+          "type": "string",
+          "name": "color_secondary",
+          "label": { "ar": "اللون الثانوي", "en": "Secondary color" },
+          "default": "#FFB627",
+          "format": "color"
+        },
+        {
+          "type": "string",
+          "name": "color_accent",
+          "label": { "ar": "اللون المميز", "en": "Accent color" },
+          "default": "#5DCAA5",
+          "format": "color"
+        },
+        {
+          "type": "string",
+          "name": "color_background",
+          "label": { "ar": "لون الخلفية", "en": "Background color" },
+          "default": "#FFF4D6",
+          "format": "color"
+        },
+        {
+          "type": "string",
+          "name": "color_text",
+          "label": { "ar": "لون النص", "en": "Text color" },
+          "default": "#3D2817",
+          "format": "color"
+        },
+        {
+          "type": "string",
+          "name": "color_sale",
+          "label": { "ar": "لون التخفيضات", "en": "Sale color" },
+          "default": "#E24B4A",
+          "format": "color"
+        }
+      ]
+    },
+    {
+      "type": "list",
+      "name": "color_preset",
+      "label": { "ar": "أطقم ألوان جاهزة", "en": "Preset themes" },
+      "options": [
+        { "value": "coral", "label": { "ar": "كورال دافئ", "en": "Warm coral" } },
+        { "value": "mint", "label": { "ar": "نعناع منعش", "en": "Fresh mint" } },
+        { "value": "berry", "label": { "ar": "توت أنيق", "en": "Elegant berry" } },
+        { "value": "midnight", "label": { "ar": "ليلي داكن", "en": "Dark midnight" } }
+      ],
+      "default": "coral"
+    },
+    {
+      "type": "collection",
+      "name": "typography",
+      "label": { "ar": "الخطوط", "en": "Typography" },
+      "fields": [
+        {
+          "type": "list",
+          "name": "font_family",
+          "label": { "ar": "الخط الأساسي", "en": "Primary font" },
+          "options": [
+            { "value": "tajawal", "label": { "ar": "Tajawal", "en": "Tajawal" } },
+            { "value": "cairo", "label": { "ar": "Cairo", "en": "Cairo" } },
+            { "value": "almarai", "label": { "ar": "Almarai", "en": "Almarai" } }
+          ],
+          "default": "tajawal"
+        }
+      ]
+    },
+    {
+      "type": "collection",
+      "name": "layout_settings",
+      "label": { "ar": "إعدادات التخطيط", "en": "Layout settings" },
+      "fields": [
+        {
+          "type": "boolean",
+          "name": "sticky_header",
+          "label": { "ar": "هيدر ثابت", "en": "Sticky header" },
+          "default": true
+        },
+        {
+          "type": "boolean",
+          "name": "show_announcement_bar",
+          "label": { "ar": "إظهار شريط الإعلانات", "en": "Show announcement bar" },
+          "default": true
+        },
+        {
+          "type": "string",
+          "name": "announcement_text",
+          "label": { "ar": "نص الإعلان", "en": "Announcement text" },
+          "default": "شحن مجاني للطلبات أكثر من ٢٠٠ ريال | Free shipping over 200 SAR"
+        }
+      ]
+    },
+    {
+      "type": "collection",
+      "name": "seo_settings",
+      "label": { "ar": "إعدادات تحسين محركات البحث", "en": "SEO settings" },
+      "fields": [
+        {
+          "type": "string",
+          "name": "google_site_verification",
+          "label": { "ar": "كود التحقق من جوجل", "en": "Google site verification" },
+          "default": ""
+        },
+        {
+          "type": "string",
+          "name": "default_brand_name",
+          "label": { "ar": "اسم العلامة الافتراضي", "en": "Default brand name" },
+          "default": "Catly"
+        },
+        {
+          "type": "boolean",
+          "name": "enable_organization_schema",
+          "label": { "ar": "تفعيل بيانات المنظمة", "en": "Enable organization schema" },
+          "default": true
+        }
+      ]
+    }
+  ],
+  "features": [
+    "component-photos-slider",
+    "component-fixed-banner",
+    "component-products-slider",
+    "component-featured-products",
+    "component-fixed-products",
+    "component-square-photos",
+    "component-store-features",
+    "component-testimonials",
+    "component-parallax-background"
+  ],
+  "components": [
+    {
+      "name": "cat-categories-grid",
+      "label": { "ar": "شبكة فئات القطط", "en": "Cat categories grid" },
+      "icon": "fas fa-th",
+      "path": "home.cat-categories-grid"
+    },
+    {
+      "name": "subscription-banner",
+      "label": { "ar": "بانر الاشتراك", "en": "Subscription banner" },
+      "icon": "fas fa-redo",
+      "path": "home.subscription-banner"
+    }
+  ]
+}

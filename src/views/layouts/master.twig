@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="{{ store.language.code }}" dir="{{ store.language.code == 'ar' ? 'rtl' : 'ltr' }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  {# ===== SEO: Title and Description ===== #}
+  <title>{{ page.title | default(store.name) }} | {{ store.name }}</title>
+  <meta name="description" content="{{ page.description | default(store.description) | striptags | slice(0, 160) }}">
+  <meta name="keywords" content="{{ page.keywords | default(store.keywords) }}">
+
+  {# ===== SEO: Canonical and Hreflang ===== #}
+  <link rel="canonical" href="{{ page.canonical_url | default(page.url) }}">
+  <link rel="alternate" hreflang="ar" href="{{ page.url_ar | default(page.url) }}">
+  <link rel="alternate" hreflang="en" href="{{ page.url_en | default(page.url) }}">
+  <link rel="alternate" hreflang="x-default" href="{{ page.url_ar | default(page.url) }}">
+
+  {# ===== SEO: Robots ===== #}
+  <meta name="robots" content="{{ page.no_index ? 'noindex,nofollow' : 'index,follow,max-image-preview:large' }}">
+
+  {# ===== SEO: Open Graph ===== #}
+  <meta property="og:type" content="{{ page.og_type | default('website') }}">
+  <meta property="og:title" content="{{ page.title | default(store.name) }}">
+  <meta property="og:description" content="{{ page.description | default(store.description) | striptags | slice(0, 200) }}">
+  <meta property="og:image" content="{{ page.og_image | default(store.cover_image) }}">
+  <meta property="og:url" content="{{ page.url }}">
+  <meta property="og:site_name" content="{{ store.name }}">
+  <meta property="og:locale" content="{{ store.language.code == 'ar' ? 'ar_SA' : 'en_US' }}">
+  <meta property="og:locale:alternate" content="{{ store.language.code == 'ar' ? 'en_US' : 'ar_SA' }}">
+
+  {# ===== SEO: Twitter Card ===== #}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ page.title | default(store.name) }}">
+  <meta name="twitter:description" content="{{ page.description | default(store.description) | striptags | slice(0, 200) }}">
+  <meta name="twitter:image" content="{{ page.og_image | default(store.cover_image) }}">
+
+  {# ===== Google Site Verification ===== #}
+  {% if store.settings.google_site_verification %}
+    <meta name="google-site-verification" content="{{ store.settings.google_site_verification }}">
+  {% endif %}
+
+  {# ===== Favicon ===== #}
+  <link rel="icon" type="image/png" href="{{ store.favicon | default(asset('images/favicon.png')) }}">
+  <link rel="apple-touch-icon" href="{{ store.favicon | default(asset('images/favicon.png')) }}">
+
+  {# ===== Fonts ===== #}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  {% set font_family = store.settings.font_family | default('tajawal') %}
+  {% if font_family == 'tajawal' %}
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  {% elseif font_family == 'cairo' %}
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;700&display=swap" rel="stylesheet">
+  {% elseif font_family == 'almarai' %}
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&display=swap" rel="stylesheet">
+  {% endif %}
+
+  {# ===== Stylesheets — RTL or LTR build ===== #}
+  {% if store.language.code == 'ar' %}
+    <link rel="stylesheet" href="{{ asset('css/main.rtl.css') }}">
+  {% else %}
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+  {% endif %}
+
+  {# ===== Theme Color Variables — driven by merchant settings ===== #}
+  <style>
+    :root {
+      --color-primary: {{ store.settings.color_primary | default('#FF7A4D') }};
+      --color-secondary: {{ store.settings.color_secondary | default('#FFB627') }};
+      --color-accent: {{ store.settings.color_accent | default('#5DCAA5') }};
+      --color-bg: {{ store.settings.color_background | default('#FFF4D6') }};
+      --color-text: {{ store.settings.color_text | default('#3D2817') }};
+      --color-sale: {{ store.settings.color_sale | default('#E24B4A') }};
+      --color-surface: #FFFFFF;
+      --color-text-muted: #8A6B4B;
+      --color-border: #F0E5C8;
+      --font-main: '{{ font_family | default('Tajawal') | capitalize }}', system-ui, -apple-system, sans-serif;
+      --radius-card: 12px;
+      --radius-pill: 999px;
+      --radius-input: 10px;
+    }
+  </style>
+
+  {# ===== Hook: head:start ===== #}
+  {% hook 'head:start' %}
+
+  {# ===== Organization Schema (every page) ===== #}
+  {% if store.settings.enable_organization_schema %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Store",
+      "name": "{{ store.name }}",
+      "url": "{{ store.url }}",
+      "logo": "{{ store.logo | default(store.cover_image) }}",
+      "image": "{{ store.cover_image }}",
+      {% if store.phone %}"telephone": "{{ store.phone }}",{% endif %}
+      {% if store.email %}"email": "{{ store.email }}",{% endif %}
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "{{ store.country_code | default('SA') }}",
+        "addressLocality": "{{ store.city | default('Riyadh') }}"
+      },
+      "sameAs": [
+        {% if store.social.instagram %}"{{ store.social.instagram }}"{% if store.social.twitter or store.social.tiktok or store.social.facebook %},{% endif %}{% endif %}
+        {% if store.social.twitter %}"{{ store.social.twitter }}"{% if store.social.tiktok or store.social.facebook %},{% endif %}{% endif %}
+        {% if store.social.tiktok %}"{{ store.social.tiktok }}"{% if store.social.facebook %},{% endif %}{% endif %}
+        {% if store.social.facebook %}"{{ store.social.facebook }}"{% endif %}
+      ]
+    }
+    </script>
+  {% endif %}
+
+  {# ===== Page-specific structured data goes here via block ===== #}
+  {% block structured_data %}{% endblock %}
+
+  {# ===== Hook: head:end ===== #}
+  {% hook 'head:end' %}
+</head>
+
+<body class="catly-theme {{ page.body_class | default('') }} font-{{ font_family }}">
+
+  {# ===== Hook: body:start ===== #}
+  {% hook 'body:start' %}
+
+  {# ===== Announcement Bar ===== #}
+  {% if store.settings.show_announcement_bar and store.settings.announcement_text %}
+    <div class="announcement-bar">
+      <div class="container">
+        <p>{{ store.settings.announcement_text }}</p>
+      </div>
+    </div>
+  {% endif %}
+
+  {# ===== Header ===== #}
+  {% component header %}
+
+  {# ===== Main Content ===== #}
+  <main id="main-content" class="main-content" role="main">
+    {% block content %}{% endblock %}
+  </main>
+
+  {# ===== Footer ===== #}
+  {% component footer %}
+
+  {# ===== Mobile Bottom Navigation (mobile-only) ===== #}
+  {% component header.mobile-nav %}
+
+  {# ===== Scripts ===== #}
+  <script src="{{ asset('js/app.js') }}" defer></script>
+
+  {# ===== Hook: body:end (Salla auto-injects core SDK here) ===== #}
+  {% hook 'body:end' %}
+
+</body>
+</html>

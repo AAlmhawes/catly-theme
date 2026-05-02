@@ -1,0 +1,271 @@
+{% extends 'layouts.master' %}
+
+{# ===== Page-specific structured data ===== #}
+{% block structured_data %}
+
+  {# Breadcrumb schema #}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "{{ trans('navigation.home') }}",
+        "item": "{{ store.url }}"
+      },
+      {% if product.category %}
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "{{ product.category.name }}",
+        "item": "{{ product.category.url }}"
+      },
+      {% endif %}
+      {
+        "@type": "ListItem",
+        "position": {% if product.category %}3{% else %}2{% endif %},
+        "name": "{{ product.name }}",
+        "item": "{{ product.url }}"
+      }
+    ]
+  }
+  </script>
+
+  {# Product schema — required for Google Merchant Center #}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": "{{ product.name }}",
+    "image": [
+      {% for image in product.images %}"{{ image.url }}"{% if not loop.last %},{% endif %}{% endfor %}
+    ],
+    "description": "{{ product.description | striptags | escape('js') }}",
+    "sku": "{{ product.sku | default(product.id) }}",
+    "mpn": "{{ product.mpn | default(product.sku) | default(product.id) }}",
+    {% if product.barcode %}"gtin13": "{{ product.barcode }}",{% endif %}
+    "brand": {
+      "@type": "Brand",
+      "name": "{{ product.brand.name | default(store.settings.default_brand_name) | default(store.name) }}"
+    },
+    "category": "{{ product.category.name | default('Pet Food') }}",
+    "offers": {
+      "@type": "Offer",
+      "url": "{{ product.url }}",
+      "priceCurrency": "{{ store.currency | default('SAR') }}",
+      "price": "{{ product.price.amount }}",
+      "priceValidUntil": "{{ product.sale_end_date | default((now | date_modify('+30 days')) | date('Y-m-d')) }}",
+      "itemCondition": "https://schema.org/NewCondition",
+      "availability": "{{ product.quantity > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock' }}",
+      "seller": {
+        "@type": "Organization",
+        "name": "{{ store.name }}"
+      },
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": "{{ product.shipping_cost | default(0) }}",
+          "currency": "{{ store.currency | default('SAR') }}"
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "{{ store.country_code | default('SA') }}"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 1,
+            "maxValue": 5,
+            "unitCode": "DAY"
+          }
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "{{ store.country_code | default('SA') }}",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 14,
+        "returnMethod": "https://schema.org/ReturnByMail",
+        "returnFees": "https://schema.org/FreeReturn"
+      }
+    }{% if product.rating and product.rating.count > 0 %},
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "{{ product.rating.average }}",
+      "reviewCount": "{{ product.rating.count }}",
+      "bestRating": "5",
+      "worstRating": "1"
+    }{% endif %}
+  }
+  </script>
+
+{% endblock %}
+
+{% block content %}
+  <div class="container" style="padding-block: 24px;">
+
+    {# Breadcrumbs (visible) #}
+    <nav class="breadcrumb" aria-label="Breadcrumb" style="font-size: 13px; margin-bottom: 16px; color: var(--color-text-muted);">
+      <a href="{{ store.url }}">{{ trans('navigation.home') }}</a>
+      {% if product.category %}
+        <span aria-hidden="true"> · </span>
+        <a href="{{ product.category.url }}">{{ product.category.name }}</a>
+      {% endif %}
+      <span aria-hidden="true"> · </span>
+      <span aria-current="page">{{ product.name }}</span>
+    </nav>
+
+    <div class="product-detail" style="display: grid; grid-template-columns: 1fr; gap: 32px; @media (min-width: 768px) { grid-template-columns: 1fr 1fr; }">
+
+      {# Product Images #}
+      <div class="product-detail__gallery">
+        <div style="background-color: var(--color-bg); border-radius: 16px; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 12px;">
+          <img
+            src="{{ product.image | default(asset('images/placeholder.png')) }}"
+            alt="{{ product.name }}"
+            width="600"
+            height="600"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            style="width: 80%; height: auto;"
+          >
+        </div>
+
+        {% if product.images | length > 1 %}
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;">
+            {% for image in product.images %}
+              <button
+                style="background-color: var(--color-bg); border-radius: 8px; aspect-ratio: 1; padding: 8px; border: 1.5px solid {{ loop.first ? 'var(--color-primary)' : 'transparent' }}; cursor: pointer;"
+                aria-label="Image {{ loop.index }}"
+              >
+                <img src="{{ image.url }}" alt="" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: contain;">
+              </button>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      {# Product Info #}
+      <div class="product-detail__info">
+        {# Category #}
+        {% if product.category %}
+          <p style="font-size: 12px; color: var(--color-primary); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 8px;">
+            {{ product.category.name }}
+          </p>
+        {% endif %}
+
+        {# Title #}
+        <h1 style="font-size: 28px; font-weight: 700; margin: 0 0 8px; line-height: 1.2;">
+          {{ product.name }}
+        </h1>
+
+        {# Brand #}
+        {% if product.brand %}
+          <p style="font-size: 13px; color: var(--color-text-muted); margin: 0 0 16px;">
+            {{ trans('product.description') }}: <strong>{{ product.brand.name }}</strong>
+          </p>
+        {% endif %}
+
+        {# Rating #}
+        {% if product.rating and product.rating.count > 0 %}
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+            <span style="color: var(--color-secondary); font-size: 14px;">
+              {% for i in 1..5 %}{{ i <= product.rating.average ? '★' : '☆' }}{% endfor %}
+            </span>
+            <span style="font-size: 13px; color: var(--color-text-muted);">
+              {{ product.rating.average }} · {{ trans('product.reviews_count', { count: product.rating.count }) }}
+            </span>
+          </div>
+        {% endif %}
+
+        {# Price #}
+        <div style="display: flex; align-items: baseline; gap: 12px; margin-bottom: 24px;">
+          <span style="font-size: 32px; font-weight: 700; color: var(--color-primary);">
+            {{ product.price.amount }} {{ store.currency | default('SAR') }}
+          </span>
+          {% if product.regular_price and product.regular_price.amount > product.price.amount %}
+            <span style="font-size: 16px; color: var(--color-text-muted); text-decoration: line-through;">
+              {{ product.regular_price.amount }} {{ store.currency | default('SAR') }}
+            </span>
+          {% endif %}
+        </div>
+
+        {# Options (size, flavor, etc.) #}
+        {% if product.options | length > 0 %}
+          {% for option in product.options %}
+            <div style="margin-bottom: 16px;">
+              <p style="font-size: 13px; font-weight: 700; margin: 0 0 8px;">{{ option.name }}</p>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                {% for value in option.values %}
+                  <button
+                    type="button"
+                    style="background: #FFFFFF; border: 1.5px solid {{ loop.first ? 'var(--color-primary)' : 'var(--color-border)' }}; padding: 8px 16px; border-radius: var(--radius-input); font-size: 13px; font-weight: 500; cursor: pointer; color: {{ loop.first ? 'var(--color-primary)' : 'var(--color-text-muted)' }};"
+                    data-option-value="{{ value.id }}"
+                  >
+                    {{ value.name }}
+                  </button>
+                {% endfor %}
+              </div>
+            </div>
+          {% endfor %}
+        {% endif %}
+
+        {# Quantity + Add to Cart #}
+        <div style="display: flex; gap: 12px; align-items: center; margin: 24px 0;">
+          <div style="display: flex; align-items: center; background: var(--color-bg); border-radius: var(--radius-pill); padding: 4px;">
+            <button type="button" data-qty-decrease style="width: 32px; height: 32px; background: #FFFFFF; border-radius: 50%; border: none; font-weight: 700; font-size: 18px; cursor: pointer;" aria-label="Decrease quantity">−</button>
+            <input type="number" name="quantity" value="1" min="1" max="{{ product.quantity }}" style="width: 40px; text-align: center; background: transparent; border: none; font-weight: 700; font-size: 14px;" aria-label="{{ trans('product.quantity') }}">
+            <button type="button" data-qty-increase style="width: 32px; height: 32px; background: #FFFFFF; border-radius: 50%; border: none; font-weight: 700; font-size: 18px; cursor: pointer;" aria-label="Increase quantity">+</button>
+          </div>
+          <button
+            type="button"
+            class="btn btn--primary"
+            style="flex: 1;"
+            data-product-id="{{ product.id }}"
+            onclick="salla.cart.addItem({ id: {{ product.id }}, quantity: this.parentElement.querySelector('[name=quantity]').value })"
+            {{ product.quantity == 0 ? 'disabled' : '' }}
+          >
+            {{ product.quantity > 0 ? trans('product.add_to_cart') : trans('product.out_of_stock') }}
+          </button>
+        </div>
+
+        {# Stock indicator #}
+        {% if product.quantity > 0 %}
+          <p style="font-size: 13px; color: var(--color-accent); margin: 0 0 24px;">
+            ● {{ trans('product.in_stock') }}
+          </p>
+        {% endif %}
+
+        {# Description #}
+        {% if product.description %}
+          <div style="border-top: 0.5px solid var(--color-border); padding-top: 24px;">
+            <h2 style="font-size: 18px; font-weight: 700; margin: 0 0 12px;">{{ trans('product.description') }}</h2>
+            <div style="font-size: 14px; line-height: 1.7; color: var(--color-text);">
+              {{ product.description | raw }}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    {# Related products — uses Salla's component #}
+    <section style="margin-top: 48px;">
+      <div class="section-heading">
+        <h2 class="section-heading__title">{{ trans('product.related_products') }}</h2>
+      </div>
+      {% component products-slider with { products: product.related } %}
+    </section>
+
+  </div>
+{% endblock %}

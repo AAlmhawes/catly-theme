@@ -1,0 +1,67 @@
+{# ===== Product Card Component ===== #}
+{# Usage: {% include 'components.product.card' with { product: product } %} #}
+
+<article class="product-card" itemscope itemtype="https://schema.org/Product">
+  <a href="{{ product.url }}" style="text-decoration: none; color: inherit; display: block;">
+
+    {# Badge #}
+    {% if product.is_on_sale %}
+      <span class="product-card__badge product-card__badge--sale">
+        -{{ ((1 - (product.price.amount / product.regular_price.amount)) * 100) | round }}%
+      </span>
+    {% elseif product.is_new %}
+      <span class="product-card__badge product-card__badge--new">{{ trans('product.new') }}</span>
+    {% elseif product.is_featured %}
+      <span class="product-card__badge">{{ trans('product.best_seller') }}</span>
+    {% endif %}
+
+    {# Image #}
+    <div class="product-card__image-wrap">
+      <img
+        src="{{ product.image | default(asset('images/placeholder.png')) }}"
+        alt="{{ product.name }}"
+        class="product-card__image"
+        width="240"
+        height="240"
+        loading="lazy"
+        decoding="async"
+        itemprop="image"
+      >
+    </div>
+
+    {# Category #}
+    {% if product.category %}
+      <p class="product-card__category">{{ product.category.name }}</p>
+    {% endif %}
+
+    {# Title #}
+    <h3 class="product-card__title" itemprop="name">{{ product.name }}</h3>
+
+    {# Subtitle (weight, size, etc.) #}
+    {% if product.subtitle %}
+      <p class="product-card__subtitle">{{ product.subtitle }}</p>
+    {% endif %}
+
+    {# Footer: price + add button #}
+    <div class="product-card__footer">
+      <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+        <span class="product-card__price" itemprop="price" content="{{ product.price.amount }}">
+          {{ product.price.amount }} {{ store.currency | default('SAR') }}
+        </span>
+        {% if product.regular_price and product.regular_price.amount > product.price.amount %}
+          <span class="product-card__price-original">{{ product.regular_price.amount }}</span>
+        {% endif %}
+        <meta itemprop="priceCurrency" content="{{ store.currency | default('SAR') }}">
+        <meta itemprop="availability" content="https://schema.org/{{ product.quantity > 0 ? 'InStock' : 'OutOfStock' }}">
+      </div>
+
+      <button
+        type="button"
+        class="product-card__add"
+        aria-label="{{ trans('product.add_to_cart') }}"
+        data-product-id="{{ product.id }}"
+        onclick="event.preventDefault(); event.stopPropagation(); salla.cart.addItem({ id: {{ product.id }}, quantity: 1 });"
+      >+</button>
+    </div>
+  </a>
+</article>

@@ -1,0 +1,24 @@
+{% extends 'layouts.master' %}
+
+{% block content %}
+  <div class="container">
+
+    {# Hero Banner — uses Salla's fixed-banner feature or fallback #}
+    <section class="hero" aria-labelledby="hero-title">
+      <p class="hero__eyebrow">{{ trans('home.new_arrivals') }}</p>
+      <h1 id="hero-title" class="hero__title">{{ trans('home.hero_title') }}</h1>
+      <p style="margin: 0 0 20px; font-size: 15px; opacity: 0.95;">{{ trans('home.hero_subtitle') }}</p>
+      <a href="{{ url('products') }}" class="btn hero__cta">{{ trans('home.shop_now') }}</a>
+    </section>
+
+    {# Category Pills #}
+    {% component home.cat-categories-grid %}
+
+    {# Salla pre-defined components — visibility controlled in Partners Portal #}
+    {% component home %}
+
+    {# Custom subscription banner #}
+    {% component home.subscription-banner %}
+
+  </div>
+{% endblock %}

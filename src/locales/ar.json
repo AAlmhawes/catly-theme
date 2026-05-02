@@ -1,0 +1,132 @@
+{
+  "common": {
+    "search": "ابحث",
+    "search_placeholder": "ابحث عن طعام قطك المفضل...",
+    "cart": "السلة",
+    "wishlist": "المفضلة",
+    "account": "حسابي",
+    "menu": "القائمة",
+    "close": "إغلاق",
+    "loading": "جاري التحميل...",
+    "see_all": "عرض الكل",
+    "see_more": "المزيد",
+    "currency": "ر.س",
+    "free": "مجاني"
+  },
+  "navigation": {
+    "home": "الرئيسية",
+    "shop": "المتجر",
+    "categories": "الفئات",
+    "brands": "العلامات",
+    "blog": "المدونة",
+    "contact": "تواصل معنا"
+  },
+  "home": {
+    "hero_title": "طعام يحبه قطك",
+    "hero_subtitle": "تغذية متوازنة لقطط سعيدة وصحية",
+    "shop_now": "تسوق الآن",
+    "best_sellers": "الأكثر مبيعاً",
+    "new_arrivals": "وصل حديثاً",
+    "featured_categories": "الفئات المميزة",
+    "subscribe_save": "اشترك ووفر ١٥٪",
+    "subscribe_description": "احصل على طعام قطك تلقائياً كل شهر"
+  },
+  "categories": {
+    "all": "الكل",
+    "dry_food": "طعام جاف",
+    "wet_food": "طعام رطب",
+    "treats": "حلويات",
+    "kittens": "قطط صغيرة",
+    "adult": "قطط بالغة",
+    "senior": "قطط كبيرة",
+    "grain_free": "خالي من الحبوب",
+    "prescription": "طبي"
+  },
+  "product": {
+    "add_to_cart": "أضف للسلة",
+    "buy_now": "اشترِ الآن",
+    "out_of_stock": "غير متوفر",
+    "in_stock": "متوفر",
+    "size": "الحجم",
+    "weight": "الوزن",
+    "flavor": "النكهة",
+    "quantity": "الكمية",
+    "description": "الوصف",
+    "ingredients": "المكونات",
+    "nutritional_info": "المعلومات الغذائية",
+    "reviews": "التقييمات",
+    "related_products": "منتجات مشابهة",
+    "best_seller": "الأكثر مبيعاً",
+    "new": "جديد",
+    "vet_approved": "موصى به بيطرياً",
+    "save": "وفر",
+    "free_shipping": "شحن مجاني",
+    "rating": "التقييم",
+    "reviews_count": "{count} تقييم"
+  },
+  "cart": {
+    "title": "سلة التسوق",
+    "empty": "سلتك فارغة",
+    "empty_cta": "ابدأ التسوق",
+    "subtotal": "المجموع الفرعي",
+    "shipping": "الشحن",
+    "discount": "الخصم",
+    "tax": "الضريبة",
+    "total": "المجموع",
+    "checkout": "إتمام الطلب",
+    "continue_shopping": "متابعة التسوق",
+    "remove": "إزالة",
+    "promo_code": "كود الخصم",
+    "apply": "تطبيق"
+  },
+  "checkout": {
+    "title": "إتمام الطلب",
+    "shipping_address": "عنوان الشحن",
+    "payment_method": "طريقة الدفع",
+    "order_summary": "ملخص الطلب",
+    "place_order": "تأكيد الطلب",
+    "order_placed": "تم تأكيد طلبك بنجاح"
+  },
+  "account": {
+    "login": "تسجيل الدخول",
+    "register": "إنشاء حساب",
+    "logout": "تسجيل الخروج",
+    "profile": "الملف الشخصي",
+    "orders": "طلباتي",
+    "addresses": "العناوين",
+    "wishlist": "المفضلة"
+  },
+  "footer": {
+    "about_us": "من نحن",
+    "customer_service": "خدمة العملاء",
+    "quick_links": "روابط سريعة",
+    "newsletter_title": "اشترك في النشرة البريدية",
+    "newsletter_description": "احصل على عروض حصرية ونصائح للعناية بقطك",
+    "email_placeholder": "بريدك الإلكتروني",
+    "subscribe": "اشترك",
+    "follow_us": "تابعنا",
+    "all_rights_reserved": "جميع الحقوق محفوظة",
+    "shipping_policy": "سياسة الشحن",
+    "return_policy": "سياسة الاسترجاع",
+    "privacy_policy": "سياسة الخصوصية",
+    "terms_conditions": "الشروط والأحكام"
+  },
+  "errors": {
+    "page_not_found": "الصفحة غير موجودة",
+    "page_not_found_description": "عذراً، الصفحة التي تبحث عنها غير موجودة",
+    "back_home": "العودة للرئيسية",
+    "something_wrong": "حدث خطأ ما",
+    "try_again": "حاول مرة أخرى",
+    "no_results": "لا توجد نتائج"
+  },
+  "store_features": {
+    "free_shipping_title": "شحن مجاني",
+    "free_shipping_description": "للطلبات أكثر من ٢٠٠ ر.س",
+    "easy_returns_title": "إرجاع سهل",
+    "easy_returns_description": "خلال ١٤ يوم",
+    "secure_payment_title": "دفع آمن",
+    "secure_payment_description": "جميع طرق الدفع متاحة",
+    "vet_approved_title": "موصى به بيطرياً",
+    "vet_approved_description": "منتجات معتمدة من خبراء"
+  }
+}
