@@ -1,0 +1,13 @@
+{% extends 'layouts.master' %}
+
+{% block content %}
+<div class="container">
+  <div class="customer-layout">
+    {% component customer.sidebar %}
+    <div class="customer-layout__content">
+      <h1 class="customer-page-title">{{ trans('order.order_number') }} #{{ order.reference_id }}</h1>
+      {% component customer.order-details %}
+    </div>
+  </div>
+</div>
+{% endblock %}

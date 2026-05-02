@@ -1,0 +1,33 @@
+{% extends 'layouts.master' %}
+
+{% block content %}
+<div class="container">
+
+  <nav class="breadcrumb" aria-label="{{ trans('general.breadcrumb') }}">
+    <a href="{{ url('home') }}">{{ trans('general.home') }}</a>
+    <span aria-hidden="true">/</span>
+    <span aria-current="page">{{ trans('products.all_products') }}</span>
+  </nav>
+
+  <div class="products-page">
+    <aside class="products-page__filters" aria-label="{{ trans('products.filters') }}">
+      {% component products.filters %}
+    </aside>
+    <div class="products-page__main">
+      <div class="products-page__toolbar">
+        <p class="products-page__count">{{ trans('products.results_count', {'count': products.total}) }}</p>
+        {% component products.sort %}
+      </div>
+      <div class="products-grid">
+        {% for product in products.items %}
+          {% component product.card with {'product': product} %}
+        {% else %}
+          <p class="empty-state">{{ trans('products.no_products') }}</p>
+        {% endfor %}
+      </div>
+      {% component products.pagination %}
+    </div>
+  </div>
+
+</div>
+{% endblock %}

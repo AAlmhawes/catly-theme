@@ -1,0 +1,36 @@
+{% extends 'layouts.master' %}
+
+{% block content %}
+<div class="container">
+
+  <nav class="breadcrumb" aria-label="{{ trans('general.breadcrumb') }}">
+    <a href="{{ url('home') }}">{{ trans('general.home') }}</a>
+    <span aria-hidden="true">/</span>
+    <a href="{{ url('brands') }}">{{ trans('brands.title') }}</a>
+    <span aria-hidden="true">/</span>
+    <span aria-current="page">{{ brand.name }}</span>
+  </nav>
+
+  <div class="brand-single">
+    {% if brand.logo %}
+      <div class="brand-single__logo">
+        <img src="{{ brand.logo }}" alt="{{ brand.name }}" width="200" height="100" loading="eager" decoding="async">
+      </div>
+    {% endif %}
+    <h1 class="brand-single__name">{{ brand.name }}</h1>
+    {% if brand.description %}
+      <p class="brand-single__desc">{{ brand.description }}</p>
+    {% endif %}
+  </div>
+
+  <div class="products-grid">
+    {% for product in products.items %}
+      {% component product.card with {'product': product} %}
+    {% else %}
+      <p class="empty-state">{{ trans('products.no_products') }}</p>
+    {% endfor %}
+  </div>
+  {% component products.pagination %}
+
+</div>
+{% endblock %}

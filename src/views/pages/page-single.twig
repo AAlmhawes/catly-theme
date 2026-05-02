@@ -1,0 +1,20 @@
+{% extends 'layouts.master' %}
+
+{% block content %}
+<div class="container">
+
+  <nav class="breadcrumb" aria-label="{{ trans('general.breadcrumb') }}">
+    <a href="{{ url('home') }}">{{ trans('general.home') }}</a>
+    <span aria-hidden="true">/</span>
+    <span aria-current="page">{{ page.title }}</span>
+  </nav>
+
+  <article class="page-single">
+    <h1 class="page-single__title">{{ page.title }}</h1>
+    <div class="page-single__content">
+      {{ page.content | raw }}
+    </div>
+  </article>
+
+</div>
+{% endblock %}

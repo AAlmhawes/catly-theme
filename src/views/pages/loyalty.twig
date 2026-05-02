@@ -1,0 +1,17 @@
+{% extends 'layouts.master' %}
+
+{% block content %}
+<div class="container">
+
+  <nav class="breadcrumb" aria-label="{{ trans('general.breadcrumb') }}">
+    <a href="{{ url('home') }}">{{ trans('general.home') }}</a>
+    <span aria-hidden="true">/</span>
+    <span aria-current="page">{{ trans('loyalty.title') }}</span>
+  </nav>
+
+  <div class="loyalty-page">
+    {% component loyalty %}
+  </div>
+
+</div>
+{% endblock %}

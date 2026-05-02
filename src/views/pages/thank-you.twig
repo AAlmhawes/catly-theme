@@ -1,0 +1,23 @@
+{% extends 'layouts.master' %}
+
+{% block content %}
+<div class="container">
+  <div class="thank-you">
+    <div class="thank-you__icon" aria-hidden="true">✓</div>
+    <h1 class="thank-you__title">{{ trans('order.thank_you_title') }}</h1>
+    <p class="thank-you__subtitle">{{ trans('order.thank_you_subtitle') }}</p>
+
+    {% if order %}
+      <div class="thank-you__order-info">
+        <p>{{ trans('order.order_number') }}: <strong>#{{ order.reference_id }}</strong></p>
+        <p>{{ trans('order.total') }}: <strong>{{ order.amounts.total.formatted }}</strong></p>
+      </div>
+    {% endif %}
+
+    <div class="thank-you__actions">
+      <a href="{{ url('customer.orders') }}" class="btn btn--primary">{{ trans('order.view_my_orders') }}</a>
+      <a href="{{ url('home') }}" class="btn btn--outline">{{ trans('general.back_to_home') }}</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'layouts.master' %}
+
+{% block content %}
+<div class="container">
+  <div class="customer-layout">
+    {% component customer.sidebar %}
+    <div class="customer-layout__content">
+      <h1 class="customer-page-title">{{ trans('customer.wishlist') }}</h1>
+      <div class="products-grid">
+        {% for product in wishlist.items %}
+          {% component product.card with {'product': product} %}
+        {% else %}
+          <p class="empty-state">{{ trans('customer.empty_wishlist') }}</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

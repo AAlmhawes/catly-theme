@@ -1,0 +1,35 @@
+{% extends 'layouts.master' %}
+
+{% block content %}
+<div class="container">
+
+  <nav class="breadcrumb" aria-label="{{ trans('general.breadcrumb') }}">
+    <a href="{{ url('home') }}">{{ trans('general.home') }}</a>
+    <span aria-hidden="true">/</span>
+    <span aria-current="page">{{ trans('brands.title') }}</span>
+  </nav>
+
+  <h1 class="page-title">{{ trans('brands.title') }}</h1>
+
+  <div class="brands-grid">
+    {% for brand in brands.items %}
+      <a href="{{ brand.url }}" class="brand-card">
+        {% if brand.logo %}
+          <img
+            src="{{ brand.logo }}"
+            alt="{{ brand.name }}"
+            width="160" height="80"
+            loading="lazy"
+            decoding="async"
+          >
+        {% else %}
+          <span class="brand-card__name">{{ brand.name }}</span>
+        {% endif %}
+      </a>
+    {% else %}
+      <p class="empty-state">{{ trans('brands.no_brands') }}</p>
+    {% endfor %}
+  </div>
+
+</div>
+{% endblock %}
