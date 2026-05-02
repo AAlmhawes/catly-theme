@@ -23,30 +23,22 @@
         {
             "id": "sticky_header",
             "type": "boolean",
+            "format": "switch",
             "icon": "sicon-toggle-off",
-            "label": "هيدر ثابت عند التمرير / Sticky header on scroll",
-            "default": true
+            "label": "تثبيت القائمة عند التمرير / Sticky header",
+            "value": true,
+            "selected": true,
+            "required": false
         },
         {
             "id": "show_announcement_bar",
             "type": "boolean",
+            "format": "switch",
             "icon": "sicon-toggle-off",
             "label": "إظهار شريط الإعلانات / Show announcement bar",
-            "default": true
-        },
-        {
-            "id": "announcement_text",
-            "type": "text",
-            "icon": "sicon-info",
-            "label": "نص الإعلان / Announcement text",
-            "default": "شحن مجاني للطلبات أكثر من ٢٠٠ ريال | Free shipping over 200 SAR"
-        },
-        {
-            "id": "default_brand_name",
-            "type": "text",
-            "icon": "sicon-info",
-            "label": "اسم العلامة الافتراضي / Default brand name",
-            "default": "Catly"
+            "value": true,
+            "selected": true,
+            "required": false
         },
         {
             "id": "color_preset",
@@ -54,6 +46,8 @@
             "format": "dropdown-list",
             "icon": "sicon-palette",
             "label": "طقم الألوان / Color preset",
+            "source": "Manual",
+            "required": false,
             "selected": [
                 {
                     "label": "كورال دافئ / Warm coral",
@@ -77,9 +71,7 @@
                     "value": "berry",
                     "key": "c3d4e5f6-a7b8-9012-cdef-123456789012"
                 }
-            ],
-            "source": "Manual",
-            "required": false
+            ]
         }
     ]
 }
