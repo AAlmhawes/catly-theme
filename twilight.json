@@ -3,8 +3,84 @@
         "ar": "كاتلي",
         "en": "Catly"
     },
+    "description": {
+        "ar": "قالب عصري وأنيق لمتاجر أغذية القطط، مع دعم كامل للعربية والإنجليزية",
+        "en": "A modern, playful theme for cat food stores, fully bilingual Arabic and English"
+    },
     "repository": "https://github.com/AAlmhawes/catly-theme",
+    "support_url": "https://github.com/AAlmhawes/catly-theme/issues",
     "author_email": "atalmhawes3@gmail.com",
-    "features": [],
-    "settings": []
+    "features": [
+        "fonts",
+        "color",
+        "breadcrumb",
+        "component-featured-products",
+        "component-fixed-banner",
+        "component-fixed-products",
+        "component-products-slider",
+        "component-photos-slider",
+        "component-store-features",
+        "component-testimonials",
+        "component-square-photos",
+        "component-parallax-background"
+    ],
+    "settings": [
+        {
+            "id": "sticky_header",
+            "type": "boolean",
+            "format": "switch",
+            "icon": "sicon-toggle-off",
+            "label": "تثبيت القائمة عند التمرير / Sticky header",
+            "description": null,
+            "value": true,
+            "selected": true,
+            "required": false
+        },
+        {
+            "id": "show_announcement_bar",
+            "type": "boolean",
+            "format": "switch",
+            "icon": "sicon-toggle-off",
+            "label": "إظهار شريط الإعلانات / Show announcement bar",
+            "description": null,
+            "value": true,
+            "selected": true,
+            "required": false
+        },
+        {
+            "id": "color_preset",
+            "type": "items",
+            "format": "dropdown-list",
+            "icon": "sicon-palette",
+            "label": "طقم الألوان / Color preset",
+            "description": null,
+            "source": "Manual",
+            "required": false,
+            "selected": [
+                {
+                    "label": "كورال دافئ / Warm coral",
+                    "value": "coral",
+                    "key": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                }
+            ],
+            "options": [
+                {
+                    "label": "كورال دافئ / Warm coral",
+                    "value": "coral",
+                    "key": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                },
+                {
+                    "label": "نعناع منعش / Fresh mint",
+                    "value": "mint",
+                    "key": "b2c3d4e5-f6a7-8901-bcde-f12345678901"
+                },
+                {
+                    "label": "توت أنيق / Elegant berry",
+                    "value": "berry",
+                    "key": "c3d4e5f6-a7b8-9012-cdef-123456789012"
+                }
+            ]
+        }
+    ],
+    "components": []
 }
