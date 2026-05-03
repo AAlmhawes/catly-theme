@@ -22,7 +22,10 @@
         "component-store-features",
         "component-testimonials",
         "component-square-photos",
-        "component-parallax-background"
+        "component-parallax-background",
+        "unite-cards-height",
+        "mega-menu",
+        "component-youtube"
     ],
     "settings": [
         {
