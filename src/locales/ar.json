@@ -29,7 +29,10 @@
     "new_arrivals": "وصل حديثاً",
     "featured_categories": "الفئات المميزة",
     "subscribe_save": "اشترك ووفر ١٥٪",
-    "subscribe_description": "احصل على طعام قطك تلقائياً كل شهر"
+    "subscribe_description": "احصل على طعام قطك تلقائياً كل شهر",
+    "sub_eyebrow": "توصيل شهري",
+    "sub_cta": "ابدأ التوفير الآن",
+    "browse_categories": "تصفح الفئات"
   },
   "categories": {
     "all": "الكل",
@@ -44,6 +47,8 @@
   },
   "product": {
     "add_to_cart": "أضف للسلة",
+    "add_to_wishlist": "أضف للمفضلة",
+    "remove_from_wishlist": "إزالة من المفضلة",
     "buy_now": "اشترِ الآن",
     "out_of_stock": "غير متوفر",
     "in_stock": "متوفر",
@@ -120,6 +125,7 @@
     "no_results": "لا توجد نتائج"
   },
   "store_features": {
+    "label": "لماذا تتسوق معنا",
     "free_shipping_title": "شحن مجاني",
     "free_shipping_description": "للطلبات أكثر من ٢٠٠ ر.س",
     "easy_returns_title": "إرجاع سهل",

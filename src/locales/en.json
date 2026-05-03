@@ -29,7 +29,10 @@
     "new_arrivals": "New arrivals",
     "featured_categories": "Featured categories",
     "subscribe_save": "Subscribe & save 15%",
-    "subscribe_description": "Get your cat's food delivered automatically every month"
+    "subscribe_description": "Get your cat's food delivered automatically every month",
+    "sub_eyebrow": "Monthly delivery",
+    "sub_cta": "Start saving now",
+    "browse_categories": "Browse categories"
   },
   "categories": {
     "all": "All",
@@ -44,6 +47,8 @@
   },
   "product": {
     "add_to_cart": "Add to cart",
+    "add_to_wishlist": "Add to wishlist",
+    "remove_from_wishlist": "Remove from wishlist",
     "buy_now": "Buy now",
     "out_of_stock": "Out of stock",
     "in_stock": "In stock",
@@ -120,6 +125,7 @@
     "no_results": "No results found"
   },
   "store_features": {
+    "label": "Why shop with us",
     "free_shipping_title": "Free shipping",
     "free_shipping_description": "On orders over 200 SAR",
     "easy_returns_title": "Easy returns",

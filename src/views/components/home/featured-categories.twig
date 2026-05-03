@@ -1,0 +1,87 @@
+{# ===== Featured Categories Grid ===== #}
+<section class="featured-categories" aria-labelledby="feat-cat-heading">
+  <div class="container">
+    <div class="section-heading">
+      <h2 id="feat-cat-heading" class="section-heading__title">{{ trans('home.featured_categories') }}</h2>
+      <a href="{{ url('categories') }}" class="section-heading__link">{{ trans('common.see_all') }}</a>
+    </div>
+
+    <div class="category-tiles">
+
+      <a href="{{ url('products', { category: 'dry-food' }) }}" class="category-tile category-tile--orange">
+        <div class="category-tile__icon" aria-hidden="true">
+          <svg width="36" height="36" viewBox="0 0 64 64" fill="none">
+            <ellipse cx="32" cy="44" rx="20" ry="10" fill="currentColor" opacity=".18"/>
+            <rect x="14" y="20" width="36" height="24" rx="8" fill="currentColor" opacity=".9"/>
+            <rect x="20" y="26" width="8" height="6" rx="2" fill="white" opacity=".7"/>
+            <rect x="36" y="26" width="8" height="6" rx="2" fill="white" opacity=".7"/>
+            <rect x="28" y="28" width="8" height="4" rx="2" fill="white" opacity=".4"/>
+          </svg>
+        </div>
+        <span class="category-tile__label">{{ trans('categories.dry_food') }}</span>
+      </a>
+
+      <a href="{{ url('products', { category: 'wet-food' }) }}" class="category-tile category-tile--teal">
+        <div class="category-tile__icon" aria-hidden="true">
+          <svg width="36" height="36" viewBox="0 0 64 64" fill="none">
+            <ellipse cx="32" cy="46" rx="18" ry="8" fill="currentColor" opacity=".2"/>
+            <path d="M16 28 Q20 18 32 16 Q44 18 48 28 Q46 44 32 46 Q18 44 16 28Z" fill="currentColor" opacity=".9"/>
+            <path d="M24 28 Q28 24 32 26 Q36 24 40 28" stroke="white" stroke-width="2" stroke-linecap="round" opacity=".6"/>
+          </svg>
+        </div>
+        <span class="category-tile__label">{{ trans('categories.wet_food') }}</span>
+      </a>
+
+      <a href="{{ url('products', { category: 'treats' }) }}" class="category-tile category-tile--coral">
+        <div class="category-tile__icon" aria-hidden="true">
+          <svg width="36" height="36" viewBox="0 0 64 64" fill="none">
+            <path d="M32 12 L36 24 L49 24 L39 32 L43 45 L32 37 L21 45 L25 32 L15 24 L28 24Z" fill="currentColor" opacity=".9"/>
+          </svg>
+        </div>
+        <span class="category-tile__label">{{ trans('categories.treats') }}</span>
+      </a>
+
+      <a href="{{ url('products', { category: 'kittens' }) }}" class="category-tile category-tile--yellow">
+        <div class="category-tile__icon" aria-hidden="true">
+          <svg width="36" height="36" viewBox="0 0 64 64" fill="none">
+            <circle cx="32" cy="34" r="16" fill="currentColor" opacity=".9"/>
+            <path d="M18 24 L22 14 L28 22" fill="currentColor" opacity=".7"/>
+            <path d="M46 24 L42 14 L36 22" fill="currentColor" opacity=".7"/>
+            <circle cx="26" cy="32" r="2.5" fill="white" opacity=".8"/>
+            <circle cx="38" cy="32" r="2.5" fill="white" opacity=".8"/>
+            <path d="M28 38 Q32 42 36 38" stroke="white" stroke-width="2" stroke-linecap="round" opacity=".7"/>
+          </svg>
+        </div>
+        <span class="category-tile__label">{{ trans('categories.kittens') }}</span>
+      </a>
+
+      <a href="{{ url('products', { category: 'senior' }) }}" class="category-tile category-tile--mint">
+        <div class="category-tile__icon" aria-hidden="true">
+          <svg width="36" height="36" viewBox="0 0 64 64" fill="none">
+            <circle cx="32" cy="34" r="16" fill="currentColor" opacity=".9"/>
+            <path d="M18 24 L22 14 L28 22" fill="currentColor" opacity=".7"/>
+            <path d="M46 24 L42 14 L36 22" fill="currentColor" opacity=".7"/>
+            <circle cx="26" cy="32" r="2.5" fill="white" opacity=".8"/>
+            <circle cx="38" cy="32" r="2.5" fill="white" opacity=".8"/>
+            <path d="M28 38 Q32 42 36 38" stroke="white" stroke-width="2" stroke-linecap="round" opacity=".7"/>
+            <path d="M24 29 Q32 25 40 29" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity=".4"/>
+          </svg>
+        </div>
+        <span class="category-tile__label">{{ trans('categories.senior') }}</span>
+      </a>
+
+      <a href="{{ url('products', { category: 'grain-free' }) }}" class="category-tile category-tile--berry">
+        <div class="category-tile__icon" aria-hidden="true">
+          <svg width="36" height="36" viewBox="0 0 64 64" fill="none">
+            <circle cx="28" cy="30" r="10" fill="currentColor" opacity=".9"/>
+            <circle cx="40" cy="26" r="8" fill="currentColor" opacity=".75"/>
+            <circle cx="36" cy="38" r="7" fill="currentColor" opacity=".6"/>
+            <path d="M32 18 Q32 10 38 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".6"/>
+          </svg>
+        </div>
+        <span class="category-tile__label">{{ trans('categories.grain_free') }}</span>
+      </a>
+
+    </div>
+  </div>
+</section>

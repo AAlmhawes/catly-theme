@@ -1,24 +1,43 @@
 {% extends 'layouts.master' %}
 
 {% block content %}
+
+  {# Trust badges — sits just below header #}
+  {% component home.trust-badges %}
+
   <div class="container">
 
-    {# Hero Banner — uses Salla's fixed-banner feature or fallback #}
+    {# Hero Banner #}
     <section class="hero" aria-labelledby="hero-title">
-      <p class="hero__eyebrow">{{ trans('home.new_arrivals') }}</p>
-      <h1 id="hero-title" class="hero__title">{{ trans('home.hero_title') }}</h1>
-      <p style="margin: 0 0 20px; font-size: 15px; opacity: 0.95;">{{ trans('home.hero_subtitle') }}</p>
-      <a href="{{ url('products') }}" class="btn hero__cta">{{ trans('home.shop_now') }}</a>
+      <div class="hero__body">
+        <p class="hero__eyebrow">{{ trans('home.new_arrivals') }}</p>
+        <h1 id="hero-title" class="hero__title">{{ trans('home.hero_title') }}</h1>
+        <p class="hero__subtitle">{{ trans('home.hero_subtitle') }}</p>
+        <div class="hero__actions">
+          <a href="{{ url('products') }}" class="btn btn--primary hero__cta">{{ trans('home.shop_now') }}</a>
+          <a href="{{ url('categories') }}" class="btn btn--ghost">{{ trans('home.browse_categories') }}</a>
+        </div>
+      </div>
+      <div class="hero__decoration" aria-hidden="true">
+        <svg class="hero__paw" width="220" height="220" viewBox="0 0 64 64" fill="white" opacity=".08">
+          <ellipse cx="20" cy="14" rx="7" ry="9"/>
+          <ellipse cx="44" cy="14" rx="7" ry="9"/>
+          <ellipse cx="10" cy="32" rx="6" ry="8"/>
+          <ellipse cx="54" cy="32" rx="6" ry="8"/>
+          <ellipse cx="32" cy="46" rx="14" ry="12"/>
+        </svg>
+      </div>
     </section>
 
-    {# Category Pills #}
-    {% component home.cat-categories-grid %}
+    {# Visual Category Tiles #}
+    {% component home.featured-categories %}
 
-    {# Salla pre-defined components — visibility controlled in Partners Portal #}
+    {# Salla pre-defined home components (products slider, featured, etc.) #}
     {% component home %}
 
     {# Custom subscription banner #}
     {% component home.subscription-banner %}
 
   </div>
+
 {% endblock %}

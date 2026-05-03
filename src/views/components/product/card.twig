@@ -1,19 +1,31 @@
 {# ===== Product Card Component ===== #}
-{# Usage: {% include 'components.product.card' with { product: product } %} #}
-
 <article class="product-card" itemscope itemtype="https://schema.org/Product">
-  <a href="{{ product.url }}" style="text-decoration: none; color: inherit; display: block;">
 
-    {# Badge #}
-    {% if product.is_on_sale %}
-      <span class="product-card__badge product-card__badge--sale">
-        -{{ ((1 - (product.price.amount / product.regular_price.amount)) * 100) | round }}%
-      </span>
-    {% elseif product.is_new %}
-      <span class="product-card__badge product-card__badge--new">{{ trans('product.new') }}</span>
-    {% elseif product.is_featured %}
-      <span class="product-card__badge">{{ trans('product.best_seller') }}</span>
-    {% endif %}
+  {# Wishlist button #}
+  <button
+    type="button"
+    class="product-card__wishlist"
+    aria-label="{{ trans('product.add_to_wishlist') }}"
+    data-wishlist-id="{{ product.id }}"
+    onclick="event.stopPropagation(); salla.wishlist.toggle({{ product.id }});"
+  >
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78Z"/>
+    </svg>
+  </button>
+
+  {# Sale / New badge #}
+  {% if product.is_on_sale %}
+    <span class="product-card__badge product-card__badge--sale">
+      -{{ ((1 - (product.price.amount / product.regular_price.amount)) * 100) | round }}%
+    </span>
+  {% elseif product.is_new %}
+    <span class="product-card__badge product-card__badge--new">{{ trans('product.new') }}</span>
+  {% elseif product.is_featured %}
+    <span class="product-card__badge">{{ trans('product.best_seller') }}</span>
+  {% endif %}
+
+  <a href="{{ product.url }}" class="product-card__link" aria-label="{{ product.name }}">
 
     {# Image #}
     <div class="product-card__image-wrap">
@@ -21,8 +33,8 @@
         src="{{ product.image | default(asset('images/placeholder.png')) }}"
         alt="{{ product.name }}"
         class="product-card__image"
-        width="240"
-        height="240"
+        width="300"
+        height="300"
         loading="lazy"
         decoding="async"
         itemprop="image"
@@ -37,31 +49,52 @@
     {# Title #}
     <h3 class="product-card__title" itemprop="name">{{ product.name }}</h3>
 
-    {# Subtitle (weight, size, etc.) #}
+    {# Subtitle / weight #}
     {% if product.subtitle %}
       <p class="product-card__subtitle">{{ product.subtitle }}</p>
     {% endif %}
 
-    {# Footer: price + add button #}
-    <div class="product-card__footer">
-      <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-        <span class="product-card__price" itemprop="price" content="{{ product.price.amount }}">
-          {{ product.price.amount }} {{ store.currency | default('SAR') }}
-        </span>
-        {% if product.regular_price and product.regular_price.amount > product.price.amount %}
-          <span class="product-card__price-original">{{ product.regular_price.amount }}</span>
-        {% endif %}
-        <meta itemprop="priceCurrency" content="{{ store.currency | default('SAR') }}">
-        <meta itemprop="availability" content="https://schema.org/{{ product.quantity > 0 ? 'InStock' : 'OutOfStock' }}">
+    {# Rating #}
+    {% if product.rating and product.rating.count > 0 %}
+      <div class="product-card__rating" aria-label="{{ trans('product.rating') }}: {{ product.rating.avg }}/5">
+        {% for i in 1..5 %}
+          <svg class="star{{ i <= product.rating.avg | round ? ' star--filled' : '' }}" width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+        {% endfor %}
+        <span class="product-card__rating-count">({{ product.rating.count }})</span>
       </div>
+    {% endif %}
 
+  </a>
+
+  {# Footer: price + add to cart #}
+  <div class="product-card__footer" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+    <div class="product-card__pricing">
+      <span class="product-card__price" itemprop="price" content="{{ product.price.amount }}">
+        {{ product.price.formatted }}
+      </span>
+      {% if product.regular_price and product.regular_price.amount > product.price.amount %}
+        <span class="product-card__price-original">{{ product.regular_price.formatted }}</span>
+      {% endif %}
+    </div>
+    <meta itemprop="priceCurrency" content="{{ store.currency | default('SAR') }}">
+    <meta itemprop="availability" content="https://schema.org/{{ product.quantity > 0 ? 'InStock' : 'OutOfStock' }}">
+
+    {% if product.quantity > 0 %}
       <button
         type="button"
         class="product-card__add"
         aria-label="{{ trans('product.add_to_cart') }}"
-        data-product-id="{{ product.id }}"
-        onclick="event.preventDefault(); event.stopPropagation(); salla.cart.addItem({ id: {{ product.id }}, quantity: 1 });"
-      >+</button>
-    </div>
-  </a>
+        onclick="salla.cart.addItem({ id: {{ product.id }}, quantity: 1 });"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <path d="M12 5v14M5 12h14"/>
+        </svg>
+      </button>
+    {% else %}
+      <span class="product-card__out-of-stock">{{ trans('product.out_of_stock') }}</span>
+    {% endif %}
+  </div>
+
 </article>

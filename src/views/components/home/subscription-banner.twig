@@ -1,12 +1,50 @@
-{# ===== Custom Component: Subscription Banner ===== #}
-<section class="subscription-banner" style="background-color: var(--color-secondary); border-radius: 20px; padding: 32px 24px; margin: 32px 0; text-align: center; color: var(--color-text);" aria-labelledby="subscribe-title">
-  <h2 id="subscribe-title" style="font-size: 24px; font-weight: 700; margin: 0 0 8px;">
-    {{ trans('home.subscribe_save') }}
-  </h2>
-  <p style="margin: 0 0 20px; font-size: 14px; max-width: 480px; margin-inline: auto;">
-    {{ trans('home.subscribe_description') }}
-  </p>
-  <a href="{{ url('subscriptions') }}" class="btn btn--primary">
-    {{ trans('home.shop_now') }}
-  </a>
+{# ===== Subscription Banner ===== #}
+<section class="sub-banner" aria-labelledby="sub-banner-title">
+  <div class="container">
+    <div class="sub-banner__card">
+
+      {# Decorative paw prints #}
+      <span class="sub-banner__paw sub-banner__paw--1" aria-hidden="true">
+        <svg width="48" height="48" viewBox="0 0 64 64" fill="currentColor" opacity=".12">
+          <ellipse cx="20" cy="14" rx="7" ry="9"/>
+          <ellipse cx="44" cy="14" rx="7" ry="9"/>
+          <ellipse cx="10" cy="32" rx="6" ry="8"/>
+          <ellipse cx="54" cy="32" rx="6" ry="8"/>
+          <ellipse cx="32" cy="46" rx="14" ry="12"/>
+        </svg>
+      </span>
+      <span class="sub-banner__paw sub-banner__paw--2" aria-hidden="true">
+        <svg width="32" height="32" viewBox="0 0 64 64" fill="currentColor" opacity=".1">
+          <ellipse cx="20" cy="14" rx="7" ry="9"/>
+          <ellipse cx="44" cy="14" rx="7" ry="9"/>
+          <ellipse cx="10" cy="32" rx="6" ry="8"/>
+          <ellipse cx="54" cy="32" rx="6" ry="8"/>
+          <ellipse cx="32" cy="46" rx="14" ry="12"/>
+        </svg>
+      </span>
+
+      <div class="sub-banner__content">
+        <p class="sub-banner__eyebrow">{{ trans('home.sub_eyebrow') }}</p>
+        <h2 id="sub-banner-title" class="sub-banner__title">{{ trans('home.subscribe_save') }}</h2>
+        <p class="sub-banner__desc">{{ trans('home.subscribe_description') }}</p>
+        <a href="{{ url('subscriptions') }}" class="btn btn--primary sub-banner__cta">
+          {{ trans('home.sub_cta') }}
+        </a>
+      </div>
+
+      <div class="sub-banner__visual" aria-hidden="true">
+        <div class="sub-banner__bubble sub-banner__bubble--1">15%</div>
+        <div class="sub-banner__bubble sub-banner__bubble--2">
+          <svg width="40" height="40" viewBox="0 0 64 64" fill="white">
+            <ellipse cx="20" cy="14" rx="7" ry="9"/>
+            <ellipse cx="44" cy="14" rx="7" ry="9"/>
+            <ellipse cx="10" cy="32" rx="6" ry="8"/>
+            <ellipse cx="54" cy="32" rx="6" ry="8"/>
+            <ellipse cx="32" cy="46" rx="14" ry="12"/>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </section>
